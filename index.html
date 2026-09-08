@@ -5,87 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rifa EJC Nossa Senhora de Perpétuo Socorro</title>
     <style>
-      /* IMAGEM DE FUNDO FIXA */
       body { 
-        font-family: Arial, sans-serif; 
-        padding: 0; margin: 0;
-        text-align: center; 
-        background-color: #f4f7f6;
-        background-image: url('https://6a84d1ebca5c68e1f89716b4.imgix.net/sandbox/ChatGPT%20Image%2018%20de%20ago.%20de%202026,%2018_38_39.png');
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: center;
+        font-family: Arial, sans-serif; padding: 0; margin: 0; text-align: center; 
+        background-color: #f4f7f6; background-image: url('https://6a84d1ebca5c68e1f89716b4.imgix.net/sandbox/ChatGPT%20Image%2018%20de%20ago.%20de%202026,%2018_38_39.png');
+        background-attachment: fixed; background-size: cover; background-position: center;
       }
-      
-      .container-principal {
-        background: rgba(255, 255, 255, 0.90);
-        min-height: 100vh;
-        padding: 20px;
-        padding-bottom: 100px; 
-      }
-
+      .container-principal { background: rgba(255, 255, 255, 0.90); min-height: 100vh; padding: 20px; padding-bottom: 100px; }
       h2 { color: #333; margin-top: 10px; }
-      
       .header-actions { margin-bottom: 20px; }
-      .btn-sorteio { 
-        background: #2b2b2b; color: #fff; padding: 12px 24px; font-size: 16px; 
-        border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
-        display: none; /* Inicia oculto */
-      }
-      
-      /* Grid otimizado para mobile e desktop */
-      .grid { 
-        display: grid; 
-        grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); 
-        gap: 8px; 
-        max-width: 900px; 
-        margin: 20px auto; 
-      }
-      
-      .num-btn { 
-        padding: 10px 0; width: 100%; cursor: pointer; border: 1px solid #ccc; 
-        border-radius: 4px; background: #fff; font-weight: bold; transition: 0.2s;
-      }
+      .btn-sorteio { background: #2b2b2b; color: #fff; padding: 12px 24px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; display: none; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 8px; max-width: 900px; margin: 20px auto; }
+      .num-btn { padding: 10px 0; width: 100%; cursor: pointer; border: 1px solid #ccc; border-radius: 4px; background: #fff; font-weight: bold; transition: 0.2s; }
       .num-btn.ocupado { background: #e74c3c; color: white; cursor: not-allowed; border-color: #c0392b; opacity: 0.7;}
       .num-btn.selecionado { background: #3498db; color: white; border-color: #2980b9; transform: scale(1.1); box-shadow: 0 2px 5px rgba(0,0,0,0.3); z-index: 2; position: relative;}
-      .num-btn:hover:not(.ocupado):not(.selecionado) { background: #e0e0e0; }
-      
-      .btn-compra-flutuante {
-        position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-        background: #27ae60; color: white; padding: 15px 40px; font-size: 18px; font-weight: bold;
-        border: none; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        cursor: pointer; display: none; z-index: 90;
-      }
-
-      .modal-overlay {
-        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.8); z-index: 99;
-      }
-      .modal-box { 
-        display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-        background: white; padding: 25px; border-radius: 8px; 
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 100; width: 90%; max-width: 400px; text-align: center; box-sizing: border-box;
-      }
-      
+      .btn-compra-flutuante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #27ae60; color: white; padding: 15px 40px; font-size: 18px; font-weight: bold; border: none; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; display: none; z-index: 90; }
+      .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99; }
+      .modal-box { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 100; width: 90%; max-width: 400px; text-align: center; box-sizing: border-box; }
       .input-group { margin-bottom: 15px; text-align: left; }
       .input-group input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
       .btn-acao { background: #3498db; color: white; border: none; padding: 12px 20px; cursor: pointer; border-radius: 4px; font-weight: bold; font-size: 16px;}
       .btn-cancelar { background: #95a5a6; color: white; border: none; padding: 12px 20px; cursor: pointer; border-radius: 4px; font-size: 16px;}
-      
       .qr-code-box { margin: 15px auto; width: 150px; height: 150px; border: 1px solid #ccc; padding: 5px; border-radius: 5px;}
       .chave-pix-texto { background: #f1f2f6; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 18px; margin-bottom: 10px; word-break: break-all; color: #333; font-weight: bold;}
-
-      #countdown-overlay {
-        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.95); z-index: 999; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
-      }
+      #countdown-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 999; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
       #countdown-number { font-size: 120px; font-weight: bold; }
       .winner-box { background: #f39c12; padding: 30px; border-radius: 10px; font-size: 22px; box-shadow: 0 0 30px rgba(243, 156, 18, 0.6); color:#fff; max-width: 90%; word-break: break-word;}
     </style>
   </head>
   <body>
 
-    <div class="container-principal" id="conteudo-principal">
+    <div class="container-principal">
       <h2 onclick="tentarLiberarAdmin()" style="cursor:pointer; display:inline-block;" title="Área Restrita">Rifa em prol EJC Nossa Senhora de Perpetuo Socorro - Jaboatão</h2>
       
       <div class="header-actions">
@@ -103,17 +52,14 @@
     <div id="modal-dados" class="modal-box">
       <h3 style="margin-top:0;">Finalizar Reserva</h3>
       <p id="resumo-selecao" style="font-size: 14px; color: #555;"></p>
-      
       <div class="input-group">
         <label>Seu Nome:</label>
         <input type="text" id="nome" autocomplete="off" placeholder="Digite seu nome completo">
       </div>
-      
       <div class="input-group">
         <label>Telefone / WhatsApp:</label>
         <input type="tel" id="telefone" placeholder="Ex: 81999999999" autocomplete="off" maxlength="11" oninput="this.value = this.value.replace(/\D/g, '')">
       </div>
-      
       <div style="display: flex; justify-content: space-between; margin-top: 20px; gap: 10px;">
         <button class="btn-cancelar" style="flex: 1;" onclick="fecharModalDados()">Voltar</button>
         <button class="btn-acao" style="background:#2ecc71; flex: 2;" onclick="confirmarReserva()">Avançar</button>
@@ -125,14 +71,10 @@
     <div id="modal-pix" class="modal-box">
       <h2 style="color: #27ae60; margin-top:0;">Reserva Concluída! 🎉</h2>
       <p style="font-size: 18px;">Total a Pagar: <strong>R$ <span id="valor-total"></span></strong></p>
-      
-      <!-- QR Code dinâmico usando uma API pública genérica -->
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=00020126580014br.gov.bcb.pix0136819860606495204000053039865802BR5915Thamirys Wanessa6008Jaboatao62070503***6304" class="qr-code-box" alt="QR Code PIX">
-      
       <p style="margin-bottom: 5px;">Chave PIX (Celular)</p>
       <div class="chave-pix-texto" id="chave-pix">81986060649</div>
       <p style="margin-bottom: 5px; font-size: 14px;"><strong>Nome:</strong> Thamirys Wanessa<br><strong>Banco:</strong> Digio</p>
-      
       <button class="btn-acao" onclick="copiarPix()" style="width: 100%; margin-bottom: 15px;">Copiar Chave PIX</button>
       <button class="btn-cancelar" onclick="concluirTudo()" style="width: 100%;">Fechar e Voltar</button>
     </div>
@@ -143,75 +85,60 @@
     </div>
 
     <script>
+      // =========================================================
+      // LINK DO SEU WEB APP DO GOOGLE ATUALIZADO AQUI:
+      // =========================================================
+      const URL_DO_SEU_WEB_APP = 'https://script.google.com/macros/s/AKfycbxOxWNz1QhOIT7KP9tuDPHC_2IZDafL0lLtQx02EEX5kD2KUKEUQ1Kd1zcofse8cgq34w/exec';
+      
       let numerosSelecionados = [];
       const PRECO_POR_NUMERO = 5.00;
 
-      // Inicia a aplicação
       window.onload = function() {
         carregarNumeros();
       };
 
-      // MOCK BACKEND: Funções para simular banco de dados no LocalStorage
-      function obterReservasDoBanco() {
-        return JSON.parse(localStorage.getItem('rifa_dados')) || [];
-      }
-
-      function salvarReservasNoBanco(reservas) {
-        localStorage.setItem('rifa_dados', JSON.stringify(reservas));
-      }
-
-      // === LÓGICA DO ADMINISTRADOR ===
       function tentarLiberarAdmin() {
-        let senha = prompt('ÁREA RESTRITA\nDigite a senha de admin ou "reset" para zerar testes:');
-        
+        let senha = prompt('ÁREA RESTRITA\nDigite a senha de admin:');
         if (senha === "viiejcsocorro") {
           document.getElementById('btn-sorteio').style.display = 'inline-block';
           alert('Acesso Concedido. Botão de sorteio ativado.');
-        } else if (senha === "reset") {
-          if(confirm('Tem certeza? Isso apagará todas as vendas feitas neste navegador.')) {
-            localStorage.removeItem('rifa_dados');
-            carregarNumeros();
-            alert('Banco de dados local zerado!');
-          }
-        } else if (senha !== null && senha !== "") {
-          alert('Senha incorreta.');
         }
       }
 
-      // === LÓGICA DA GRADE ===
       function carregarNumeros() {
         document.getElementById('loading').style.display = 'block';
         
-        // Simula o tempo de resposta de um servidor
-        setTimeout(() => {
-          const reservas = obterReservasDoBanco();
-          const ocupados = reservas.map(r => r.numero); // Extrai apenas os números
-          
-          document.getElementById('loading').style.display = 'none';
-          const grid = document.getElementById('grid');
-          grid.innerHTML = '';
-          numerosSelecionados = []; 
-          atualizarBotaoCompra();
+        fetch(`${URL_DO_SEU_WEB_APP}?action=getNumeros`)
+          .then(res => res.json())
+          .then(data => {
+            const ocupados = data.ocupados || [];
+            document.getElementById('loading').style.display = 'none';
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+            numerosSelecionados = []; 
+            atualizarBotaoCompra();
 
-          // Renderiza os 999 botões
-          for (let i = 1; i <= 999; i++) {
-            let numStr = String(i).padStart(4, '0');
-            let btn = document.createElement('button');
-            btn.className = 'num-btn';
-            btn.innerText = numStr;
+            for (let i = 1; i <= 999; i++) {
+              let numStr = String(i).padStart(4, '0');
+              let btn = document.createElement('button');
+              btn.className = 'num-btn';
+              btn.innerText = numStr;
 
-            if (ocupados.includes(numStr)) {
-              btn.classList.add('ocupado');
-              btn.disabled = true;
-            } else {
-              btn.onclick = () => alternarSelecao(btn, numStr);
+              if (ocupados.includes(numStr)) {
+                btn.classList.add('ocupado');
+                btn.disabled = true;
+              } else {
+                btn.onclick = () => alternarSelecao(btn, numStr);
+              }
+              grid.appendChild(btn);
             }
-            grid.appendChild(btn);
-          }
-        }, 300); // 300ms de atraso simulado
+          })
+          .catch(error => {
+            console.error('Erro:', error);
+            document.getElementById('loading').innerText = 'Erro ao carregar os números. Verifique a conexão.';
+          });
       }
 
-      // === LÓGICA DO CARRINHO ===
       function alternarSelecao(btn, numero) {
         if (numerosSelecionados.includes(numero)) {
           numerosSelecionados = numerosSelecionados.filter(n => n !== numero);
@@ -233,7 +160,6 @@
         }
       }
 
-      // === FLUXO DE CHECKOUT ===
       function abrirModalDados() {
         document.getElementById('resumo-selecao').innerText = `Você selecionou ${numerosSelecionados.length} número(s): ${numerosSelecionados.join(', ')}`;
         document.getElementById('modal-dados').style.display = 'block';
@@ -256,37 +182,45 @@
 
         fecharModalDados();
         document.getElementById('loading').style.display = 'block';
+        document.getElementById('loading').innerText = 'Salvando sua reserva...';
         document.getElementById('grid').innerHTML = ''; 
         document.getElementById('btn-comprar').style.display = 'none';
 
-        // Simula o salvamento no banco de dados
-        setTimeout(() => {
-          let reservas = obterReservasDoBanco();
-          
-          // Adiciona as novas reservas ao array existente
-          numerosSelecionados.forEach(num => {
-            reservas.push({ numero: num, nome: nome, telefone: telefone });
-          });
-
-          salvarReservasNoBanco(reservas);
-          abrirTelaPix();
-        }, 600);
+        // Envia os dados para a planilha via POST
+        fetch(URL_DO_SEU_WEB_APP, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'salvar',
+            numeros: numerosSelecionados,
+            nome: nome,
+            telefone: telefone
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if(data.sucesso) {
+            abrirTelaPix();
+          } else {
+            alert('Alguns números já foram vendidos. A página será atualizada.');
+            carregarNumeros();
+          }
+        })
+        .catch(error => {
+          alert('Erro ao salvar. Tente novamente.');
+          carregarNumeros();
+        });
       }
 
-      // === TELA FINAL PIX ===
       function abrirTelaPix() {
         document.getElementById('loading').style.display = 'none';
-        
         const valorCalculado = numerosSelecionados.length * PRECO_POR_NUMERO;
         document.getElementById('valor-total').innerText = valorCalculado.toFixed(2).replace('.', ',');
-
         document.getElementById('modal-pix').style.display = 'block';
         document.getElementById('overlay-pix').style.display = 'block';
       }
 
       function copiarPix() {
-        const textoChave = document.getElementById('chave-pix').innerText;
-        navigator.clipboard.writeText(textoChave).then(() => {
+        navigator.clipboard.writeText(document.getElementById('chave-pix').innerText).then(() => {
           alert('Chave PIX copiada! Abra o app do seu banco e cole.');
         });
       }
@@ -299,21 +233,17 @@
         carregarNumeros(); 
       }
 
-      // === SISTEMA DE SORTEIO ===
       function prepararSorteio() {
-        const reservas = obterReservasDoBanco();
-        
-        if(reservas.length === 0) {
-          alert('Nenhum número foi vendido ainda. Impossível sortear.');
-          return;
-        }
-
-        if(confirm(`Iniciar sorteio entre os ${reservas.length} números cadastrados?`)) {
-          // Sorteia um índice aleatório baseado no tamanho do array de vendas
-          const indiceSorteado = Math.floor(Math.random() * reservas.length);
-          const vencedor = reservas[indiceSorteado];
-          
-          iniciarContagemRegressiva(vencedor);
+        if(confirm(`Iniciar sorteio entre os números cadastrados na planilha?`)) {
+          fetch(`${URL_DO_SEU_WEB_APP}?action=sortear`)
+            .then(res => res.json())
+            .then(data => {
+              if(data.sucesso) {
+                iniciarContagemRegressiva(data);
+              } else {
+                alert(data.mensagem || 'Erro ao realizar o sorteio.');
+              }
+            });
         }
       }
 
